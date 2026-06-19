@@ -1,0 +1,9 @@
+.env
+*.db
+*.json
+__pycache__/
+venv/
+*.pyc
+*.pyo
+static/images/projects/
+.claude/

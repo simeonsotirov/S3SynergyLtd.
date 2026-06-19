@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conceptual &amp; Technical Design — S3 Synergy Ltd</title>
+    <meta name="description" content="From initial concepts to detailed technical documentation — robust engineering project planning and execution." />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-container">
+        <a href="{{ url_for('home') }}" class="logo-link" aria-label="Go to homepage">
+            <img src="{{ url_for('static', filename='images/logo_S3.png') }}" alt="S3 Synergy Ltd Logo" class="logo-img">
+            <div class="logo-text">
+                <div class="company-name" data-en="{{ cv('shared', 'company_name') }}" data-bg="{{ cv('shared', 'company_name', 'bg') }}">{{ cv('shared', 'company_name') }}</div>
+                <div class="slogan" data-en="{{ cv('shared', 'slogan') }}" data-bg="{{ cv('shared', 'slogan', 'bg') }}">{{ cv('shared', 'slogan') }}</div>
+            </div>
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}" data-en="{{ cv('shared', 'nav_home') }}" data-bg="{{ cv('shared', 'nav_home', 'bg') }}">{{ cv('shared', 'nav_home') }}</a></li>
+                <li><a href="{{ url_for('services') }}" class="active" data-en="{{ cv('shared', 'nav_services') }}" data-bg="{{ cv('shared', 'nav_services', 'bg') }}">{{ cv('shared', 'nav_services') }}</a></li>
+                <li><a href="{{ url_for('projects') }}" data-en="{{ cv('shared', 'nav_projects') }}" data-bg="{{ cv('shared', 'nav_projects', 'bg') }}">{{ cv('shared', 'nav_projects') }}</a></li>
+                <li><a href="{{ url_for('contact') }}" data-en="{{ cv('shared', 'nav_contact') }}" data-bg="{{ cv('shared', 'nav_contact', 'bg') }}">{{ cv('shared', 'nav_contact') }}</a></li>
+            </ul>
+            <button id="lang-switch" class="lang-btn" style="margin-left:20px;">BG</button>
+        </div>
+    </div>
+</nav>
+
+<nav class="svc-breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+        <a href="{{ url_for('home') }}" data-en="{{ cv('shared', 'nav_home') }}" data-bg="{{ cv('shared', 'nav_home', 'bg') }}">{{ cv('shared', 'nav_home') }}</a>
+        <span>›</span>
+        <a href="{{ url_for('services') }}" data-en="{{ cv('shared', 'nav_services') }}" data-bg="{{ cv('shared', 'nav_services', 'bg') }}">{{ cv('shared', 'nav_services') }}</a>
+        <span>›</span>
+        <span data-en="{{ cv('conceptual', 'hero_title') }}" data-bg="{{ cv('conceptual', 'hero_title', 'bg') }}">{{ cv('conceptual', 'hero_title') }}</span>
+    </div>
+</nav>
+
+<section class="svc-hero">
+    <div class="svc-hero-bg" style="background-image: url({{ url_for('static', filename='images/services.jpg') }});"></div>
+    <div class="svc-hero-overlay" style="background: linear-gradient(135deg, rgba(34,50,66,0.90) 0%, rgba(68,85,102,0.70) 100%);"></div>
+    <div class="svc-hero-content">
+        <span class="svc-hero-eyebrow" data-en="{{ cv('conceptual', 'hero_eyebrow') }}" data-bg="{{ cv('conceptual', 'hero_eyebrow', 'bg') }}">{{ cv('conceptual', 'hero_eyebrow') }}</span>
+        <h1 data-en="{{ cv('conceptual', 'hero_title') }}" data-bg="{{ cv('conceptual', 'hero_title', 'bg') }}">{{ cv('conceptual', 'hero_title') }}</h1>
+        <p data-en="{{ cv('conceptual', 'hero_desc') }}" data-bg="{{ cv('conceptual', 'hero_desc', 'bg') }}">
+            {{ cv('conceptual', 'hero_desc') }}
+        </p>
+    </div>
+</section>
+
+<section class="svc-intro">
+    <div class="svc-intro-grid">
+        <div class="svc-intro-text">
+            <h2 data-en="{{ cv('conceptual', 'intro_h2') }}" data-bg="{{ cv('conceptual', 'intro_h2', 'bg') }}">{{ cv('conceptual', 'intro_h2') }}</h2>
+            <p data-en="{{ cv('conceptual', 'intro_p1') }}" data-bg="{{ cv('conceptual', 'intro_p1', 'bg') }}">
+                {{ cv('conceptual', 'intro_p1') }}
+            </p>
+            <ul class="svc-highlight-list">
+                <li data-en="{{ cv('conceptual', 'hl1') }}" data-bg="{{ cv('conceptual', 'hl1', 'bg') }}">{{ cv('conceptual', 'hl1') }}</li>
+                <li data-en="{{ cv('conceptual', 'hl2') }}" data-bg="{{ cv('conceptual', 'hl2', 'bg') }}">{{ cv('conceptual', 'hl2') }}</li>
+                <li data-en="{{ cv('conceptual', 'hl3') }}" data-bg="{{ cv('conceptual', 'hl3', 'bg') }}">{{ cv('conceptual', 'hl3') }}</li>
+                <li data-en="{{ cv('conceptual', 'hl4') }}" data-bg="{{ cv('conceptual', 'hl4', 'bg') }}">{{ cv('conceptual', 'hl4') }}</li>
+                <li data-en="{{ cv('conceptual', 'hl5') }}" data-bg="{{ cv('conceptual', 'hl5', 'bg') }}">{{ cv('conceptual', 'hl5') }}</li>
+            </ul>
+        </div>
+        <div class="svc-scope-panel">
+            <span class="svc-scope-panel-label" data-en="{{ cv('conceptual', 'scope_label') }}" data-bg="{{ cv('conceptual', 'scope_label', 'bg') }}">{{ cv('conceptual', 'scope_label') }}</span>
+            <ul class="svc-scope-list">
+                <li>
+                    <span class="svc-scope-num">01</span>
+                    <span data-en="{{ cv('conceptual', 'scope1') }}" data-bg="{{ cv('conceptual', 'scope1', 'bg') }}">{{ cv('conceptual', 'scope1') }}</span>
+                </li>
+                <li>
+                    <span class="svc-scope-num">02</span>
+                    <span data-en="{{ cv('conceptual', 'scope2') }}" data-bg="{{ cv('conceptual', 'scope2', 'bg') }}">{{ cv('conceptual', 'scope2') }}</span>
+                </li>
+                <li>
+                    <span class="svc-scope-num">03</span>
+                    <span data-en="{{ cv('conceptual', 'scope3') }}" data-bg="{{ cv('conceptual', 'scope3', 'bg') }}">{{ cv('conceptual', 'scope3') }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="svc-process" style="background:#f5f7f9; padding:80px 20px;">
+    <div class="svc-section-header">
+        <h2 data-en="{{ cv('conceptual', 'process_h2') }}" data-bg="{{ cv('conceptual', 'process_h2', 'bg') }}">{{ cv('conceptual', 'process_h2') }}</h2>
+        <p data-en="{{ cv('conceptual', 'process_p') }}" data-bg="{{ cv('conceptual', 'process_p', 'bg') }}">
+            {{ cv('conceptual', 'process_p') }}
+        </p>
+    </div>
+    <div class="svc-timeline">
+        <div class="svc-timeline-item">
+            <div class="svc-timeline-left">
+                <div class="svc-timeline-num">1</div>
+                <div class="svc-timeline-line"></div>
+            </div>
+            <div class="svc-timeline-body">
+                <h3 data-en="{{ cv('conceptual', 'tl1_h3') }}" data-bg="{{ cv('conceptual', 'tl1_h3', 'bg') }}">{{ cv('conceptual', 'tl1_h3') }}</h3>
+                <p data-en="{{ cv('conceptual', 'tl1_p') }}" data-bg="{{ cv('conceptual', 'tl1_p', 'bg') }}">{{ cv('conceptual', 'tl1_p') }}</p>
+            </div>
+        </div>
+        <div class="svc-timeline-item">
+            <div class="svc-timeline-left">
+                <div class="svc-timeline-num">2</div>
+                <div class="svc-timeline-line"></div>
+            </div>
+            <div class="svc-timeline-body">
+                <h3 data-en="{{ cv('conceptual', 'tl2_h3') }}" data-bg="{{ cv('conceptual', 'tl2_h3', 'bg') }}">{{ cv('conceptual', 'tl2_h3') }}</h3>
+                <p data-en="{{ cv('conceptual', 'tl2_p') }}" data-bg="{{ cv('conceptual', 'tl2_p', 'bg') }}">{{ cv('conceptual', 'tl2_p') }}</p>
+            </div>
+        </div>
+        <div class="svc-timeline-item">
+            <div class="svc-timeline-left">
+                <div class="svc-timeline-num">3</div>
+                <div class="svc-timeline-line"></div>
+            </div>
+            <div class="svc-timeline-body">
+                <h3 data-en="{{ cv('conceptual', 'tl3_h3') }}" data-bg="{{ cv('conceptual', 'tl3_h3', 'bg') }}">{{ cv('conceptual', 'tl3_h3') }}</h3>
+                <p data-en="{{ cv('conceptual', 'tl3_p') }}" data-bg="{{ cv('conceptual', 'tl3_p', 'bg') }}">{{ cv('conceptual', 'tl3_p') }}</p>
+            </div>
+        </div>
+        <div class="svc-timeline-item">
+            <div class="svc-timeline-left">
+                <div class="svc-timeline-num">4</div>
+                <div class="svc-timeline-line"></div>
+            </div>
+            <div class="svc-timeline-body">
+                <h3 data-en="{{ cv('conceptual', 'tl4_h3') }}" data-bg="{{ cv('conceptual', 'tl4_h3', 'bg') }}">{{ cv('conceptual', 'tl4_h3') }}</h3>
+                <p data-en="{{ cv('conceptual', 'tl4_p') }}" data-bg="{{ cv('conceptual', 'tl4_p', 'bg') }}">{{ cv('conceptual', 'tl4_p') }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="svc-capabilities" style="background:#fff; padding:80px 20px;">
+    <div class="svc-section-header">
+        <h2 data-en="{{ cv('conceptual', 'deliv_h2') }}" data-bg="{{ cv('conceptual', 'deliv_h2', 'bg') }}">{{ cv('conceptual', 'deliv_h2') }}</h2>
+        <p data-en="{{ cv('conceptual', 'deliv_p') }}" data-bg="{{ cv('conceptual', 'deliv_p', 'bg') }}">{{ cv('conceptual', 'deliv_p') }}</p>
+    </div>
+    <div class="svc-def-grid">
+        <div class="svc-def-item">
+            <h3 data-en="{{ cv('conceptual', 'def1_h3') }}" data-bg="{{ cv('conceptual', 'def1_h3', 'bg') }}">{{ cv('conceptual', 'def1_h3') }}</h3>
+            <p data-en="{{ cv('conceptual', 'def1_p') }}" data-bg="{{ cv('conceptual', 'def1_p', 'bg') }}">{{ cv('conceptual', 'def1_p') }}</p>
+        </div>
+        <div class="svc-def-item">
+            <h3 data-en="{{ cv('conceptual', 'def2_h3') }}" data-bg="{{ cv('conceptual', 'def2_h3', 'bg') }}">{{ cv('conceptual', 'def2_h3') }}</h3>
+            <p data-en="{{ cv('conceptual', 'def2_p') }}" data-bg="{{ cv('conceptual', 'def2_p', 'bg') }}">{{ cv('conceptual', 'def2_p') }}</p>
+        </div>
+        <div class="svc-def-item">
+            <h3 data-en="{{ cv('conceptual', 'def3_h3') }}" data-bg="{{ cv('conceptual', 'def3_h3', 'bg') }}">{{ cv('conceptual', 'def3_h3') }}</h3>
+            <p data-en="{{ cv('conceptual', 'def3_p') }}" data-bg="{{ cv('conceptual', 'def3_p', 'bg') }}">{{ cv('conceptual', 'def3_p') }}</p>
+        </div>
+        <div class="svc-def-item">
+            <h3 data-en="{{ cv('conceptual', 'def4_h3') }}" data-bg="{{ cv('conceptual', 'def4_h3', 'bg') }}">{{ cv('conceptual', 'def4_h3') }}</h3>
+            <p data-en="{{ cv('conceptual', 'def4_p') }}" data-bg="{{ cv('conceptual', 'def4_p', 'bg') }}">{{ cv('conceptual', 'def4_p') }}</p>
+        </div>
+        <div class="svc-def-item">
+            <h3 data-en="{{ cv('conceptual', 'def5_h3') }}" data-bg="{{ cv('conceptual', 'def5_h3', 'bg') }}">{{ cv('conceptual', 'def5_h3') }}</h3>
+            <p data-en="{{ cv('conceptual', 'def5_p') }}" data-bg="{{ cv('conceptual', 'def5_p', 'bg') }}">{{ cv('conceptual', 'def5_p') }}</p>
+        </div>
+        <div class="svc-def-item">
+            <h3 data-en="{{ cv('conceptual', 'def6_h3') }}" data-bg="{{ cv('conceptual', 'def6_h3', 'bg') }}">{{ cv('conceptual', 'def6_h3') }}</h3>
+            <p data-en="{{ cv('conceptual', 'def6_p') }}" data-bg="{{ cv('conceptual', 'def6_p', 'bg') }}">{{ cv('conceptual', 'def6_p') }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="svc-standards">
+    <h3 data-en="{{ cv('conceptual', 'std_h3') }}" data-bg="{{ cv('conceptual', 'std_h3', 'bg') }}">{{ cv('conceptual', 'std_h3') }}</h3>
+    <div class="svc-standards-list">
+        <span class="svc-std-tag">Eurocode</span>
+        <span class="svc-std-tag">EN ISO 9001</span>
+        <span class="svc-std-tag">ISO 3098</span>
+        <span class="svc-std-tag">AutoCAD</span>
+        <span class="svc-std-tag">SolidWorks</span>
+        <span class="svc-std-tag">Bulgarian NSI</span>
+        <span class="svc-std-tag">EU Pressure Equipment Directive</span>
+        <span class="svc-std-tag">ISO 128</span>
+    </div>
+</section>
+
+<section class="svc-cta">
+    <h2 data-en="{{ cv('conceptual', 'cta_h2') }}" data-bg="{{ cv('conceptual', 'cta_h2', 'bg') }}">{{ cv('conceptual', 'cta_h2') }}</h2>
+    <p data-en="{{ cv('conceptual', 'cta_p') }}" data-bg="{{ cv('conceptual', 'cta_p', 'bg') }}">
+        {{ cv('conceptual', 'cta_p') }}
+    </p>
+    <div class="svc-cta-actions">
+        <a href="{{ url_for('contact') }}" class="svc-cta-btn" data-en="{{ cv('conceptual', 'cta_btn1') }}" data-bg="{{ cv('conceptual', 'cta_btn1', 'bg') }}">{{ cv('conceptual', 'cta_btn1') }}</a>
+        <a href="{{ url_for('services') }}" class="svc-cta-secondary" data-en="{{ cv('conceptual', 'cta_btn2') }}" data-bg="{{ cv('conceptual', 'cta_btn2', 'bg') }}">{{ cv('conceptual', 'cta_btn2') }}</a>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p data-en="{{ cv('shared', 'footer_text') }}" data-bg="{{ cv('shared', 'footer_text', 'bg') }}">{{ cv('shared', 'footer_text') }}</p>
+        <div style="text-align:center;">
+            <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

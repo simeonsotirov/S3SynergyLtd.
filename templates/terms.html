@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>S3 Synergy Ltd - Terms and Conditions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Terms and Conditions for S3 Synergy Ltd. Please read these terms carefully." />
+    <meta name="keywords" content="terms, conditions, policy, legal, privacy, cookies, governing law" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <!-- ...existing styles moved to style.css... -->
+</head>
+<body>
+    <!-- Full Home Page Navbar Copied -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <!-- Logo + firm name + slogan -->
+            <a href="{{ url_for('home') }}" class="logo-link" aria-label="Go to homepage">
+                <img src="{{ url_for('static', filename='images/logo_S3.png') }}" alt="S3 Synergy Ltd Logo" class="logo-img">
+                <div class="logo-text">
+                    <div class="company-name" data-en="S3 Synergy" data-bg="S3 Синерджи">S3 Synergy</div>
+                    <div class="slogan" data-en="Driven by Innovation, Defined by Quality." data-bg="Водени от иновации, определени от качество.">
+                        Driven by Innovation, Defined by Quality.
+                    </div>
+                </div>
+            </a>
+            <!-- New Flex Container for Navigation Links and Language Button -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}" class="active" data-en="Home" data-bg="Начало">Home</a></li>
+                    <li><a href="{{ url_for('services') }}" data-en="Services" data-bg="Услуги">Services</a></li>
+                    <li><a href="{{ url_for('projects') }}" data-en="Projects" data-bg="Проекти">Projects</a></li>
+                    <li><a href="{{ url_for('contact') }}" data-en="Contact" data-bg="Контакт">Contact</a></li>
+                </ul>
+
+                <!-- Language button -->
+                <button id="lang-switch" class="lang-btn" style="margin-left: 20px;">BG</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="terms-section">
+        <div class="container">
+            <h1 data-en="Terms and Conditions" data-bg="Общи условия">Terms and Conditions</h1>
+            
+            <section class="terms-content">
+                <h2 data-en="1. Introduction" data-bg="1. Въведение">1. Introduction</h2>
+                <p data-en="Welcome to S3 Synergy Ltd's website. These Terms and Conditions govern your use of our services and website. By accessing or using our services, you agree to be bound by these Terms and Conditions." 
+                   data-bg="Добре дошли в уебсайта на S3 Synergy Ltd. Тези Общи условия регулират използването на нашите услуги и уебсайт. Чрез достъп или използване на нашите услуги, вие се съгласявате да бъдете обвързани с тези Общи условия.">
+                    Welcome to S3 Synergy Ltd's website. These Terms and Conditions govern your use of our services and website. By accessing or using our services, you agree to be bound by these Terms and Conditions.
+                </p>
+                
+                <h2 data-en="2. User Responsibilities" data-bg="2. Отговорности на потребителя">2. User Responsibilities</h2>
+                <p data-en="Users of our services agree to provide accurate information when requested and to comply with all applicable laws and regulations. Users are responsible for maintaining the confidentiality of any passwords or account credentials."
+                   data-bg="Потребителите на нашите услуги се съгласяват да предоставят точна информация, когато това се изисква, и да спазват всички приложими закони и разпоредби. Потребителите са отговорни за поддържане на поверителността на всички пароли или данни за акаунт.">
+                    Users of our services agree to provide accurate information when requested and to comply with all applicable laws and regulations. Users are responsible for maintaining the confidentiality of any passwords or account credentials.
+                </p>
+                
+                <h2 data-en="3. Intellectual Property" data-bg="3. Интелектуална собственост">3. Intellectual Property</h2>
+                <p data-en="All content on this website, including text, graphics, logos, images, and software, is the property of S3 Synergy Ltd and protected by intellectual property laws. Users may not reproduce, distribute, or create derivative works without our explicit permission."
+                   data-bg="Цялото съдържание на този уебсайт, включително текст, графики, лога, изображения и софтуер, е собственост на S3 Synergy Ltd и е защитено от законите за интелектуална собственост. Потребителите не могат да възпроизвеждат, разпространяват или създават производни произведения без нашето изрично разрешение.">
+                    All content on this website, including text, graphics, logos, images, and software, is the property of S3 Synergy Ltd and protected by intellectual property laws. Users may not reproduce, distribute, or create derivative works without our explicit permission.
+                </p>
+                
+                <h2 data-en="4. Engineering Services" data-bg="4. Инженерни услуги">4. Engineering Services</h2>
+                <p data-en="Any engineering services provided by S3 Synergy Ltd are subject to separate contractual agreements. These Terms and Conditions do not constitute a contract for specific engineering services, which require separate written agreements."
+                   data-bg="Всички инженерни услуги, предоставени от S3 Synergy Ltd, подлежат на отделни договорни споразумения. Тези Общи условия не представляват договор за конкретни инженерни услуги, които изискват отделни писмени споразумения.">
+                    Any engineering services provided by S3 Synergy Ltd are subject to separate contractual agreements. These Terms and Conditions do not constitute a contract for specific engineering services, which require separate written agreements.
+                </p>
+                
+                <h2 data-en="5. Limitation of Liability" data-bg="5. Ограничение на отговорността">5. Limitation of Liability</h2>
+                <p data-en="S3 Synergy Ltd shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our services or any content provided therein. Our liability is limited to the maximum extent permitted by law."
+                   data-bg="S3 Synergy Ltd не носи отговорност за никакви непреки, случайни, специални, последващи или наказателни щети, произтичащи от използването на нашите услуги или предоставеното в тях съдържание. Нашата отговорност е ограничена до максималната степен, разрешена от закона.">
+                    S3 Synergy Ltd shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our services or any content provided therein. Our liability is limited to the maximum extent permitted by law.
+                </p>
+                
+                <h2 data-en="6. Privacy Policy" data-bg="6. Политика за поверителност">6. Privacy Policy</h2>
+                <p data-en="Your use of our services is also governed by our Privacy Policy, which explains how we collect, use, and protect your personal information."
+                   data-bg="Използването на нашите услуги се регулира също от нашата Политика за поверителност, която обяснява как събираме, използваме и защитаваме вашата лична информация.">
+                    Your use of our services is also governed by our Privacy Policy, which explains how we collect, use, and protect your personal information.
+                </p>
+                
+                <h2 data-en="7. Amendments" data-bg="7. Изменения">7. Amendments</h2>
+                <p data-en="We reserve the right to modify these Terms and Conditions at any time. Changes will be effective immediately upon posting on our website. Your continued use of our services after any modifications constitutes your acceptance of the revised Terms and Conditions."
+                   data-bg="Запазваме си правото да променяме тези Общи условия по всяко време. Промените ще влязат в сила незабавно след публикуването им на нашия уебсайт. Продължаването на използването на нашите услуги след всякакви промени представлява вашето приемане на преработените Общи условия.">
+                    We reserve the right to modify these Terms and Conditions at any time. Changes will be effective immediately upon posting on our website. Your continued use of our services after any modifications constitutes your acceptance of the revised Terms and Conditions.
+                </p>
+                
+                <h2 data-en="8. Governing Law" data-bg="8. Приложимо право">8. Governing Law</h2>
+                <p data-en="These Terms and Conditions shall be governed by and construed in accordance with the laws of Bulgaria. Any disputes arising under these Terms and Conditions shall be subject to the exclusive jurisdiction of the courts of Bulgaria."
+                   data-bg="Тези Общи условия се регулират и тълкуват в съответствие със законите на България. Всички спорове, произтичащи от тези Общи условия, подлежат на изключителната юрисдикция на съдилищата на България.">
+                    These Terms and Conditions shall be governed by and construed in accordance with the laws of Bulgaria. Any disputes arising under these Terms and Conditions shall be subject to the exclusive jurisdiction of the courts of Bulgaria.
+                </p>
+                
+                <h2 data-en="9. Contact Information" data-bg="9. Информация за контакт">9. Contact Information</h2>
+                <p data-en="If you have any questions about these Terms and Conditions, please contact us at info@s3synergy.com."
+                   data-bg="Ако имате въпроси относно тези Общи условия, моля, свържете се с нас на info@s3synergy.com.">
+                    If you have any questions about these Terms and Conditions, please contact us at info@s3synergy.com.
+                </p>
+                
+                <p class="last-updated" data-en="Last updated: June 15, 2023" data-bg="Последна актуализация: 15 юни, 2023">
+                    Last updated: June 15, 2023
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 S3 Synergy Ltd. All rights reserved. Website made by S. Sotirov.</p>
+            <div style="text-align: center;">
+                <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+                |
+                <a href="{{ url_for('cookie_policy') }}">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

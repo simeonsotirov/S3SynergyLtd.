@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>S3 Synergy Ltd - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="S3 Synergy Ltd offers innovative engineering solutions that combine creativity and technical expertise to deliver scalable, reliable projects." />
+    <meta name="keywords" content="engineering, solutions, innovation, scalable, reliable, engineering projects" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="{{ url_for('home') }}" class="logo-link" aria-label="Go to homepage">
+                <img src="{{ url_for('static', filename='images/logo_S3.png') }}" alt="S3 Synergy Ltd Logo" class="logo-img">
+                <div class="logo-text">
+                    <div class="company-name" data-en="{{ cv('shared', 'company_name') }}" data-bg="{{ cv('shared', 'company_name', 'bg') }}">{{ cv('shared', 'company_name') }}</div>
+                    <div class="slogan" data-en="{{ cv('shared', 'slogan') }}" data-bg="{{ cv('shared', 'slogan', 'bg') }}">{{ cv('shared', 'slogan') }}</div>
+                </div>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}" class="active" data-en="{{ cv('shared', 'nav_home') }}" data-bg="{{ cv('shared', 'nav_home', 'bg') }}">{{ cv('shared', 'nav_home') }}</a></li>
+                    <li><a href="{{ url_for('services') }}" data-en="{{ cv('shared', 'nav_services') }}" data-bg="{{ cv('shared', 'nav_services', 'bg') }}">{{ cv('shared', 'nav_services') }}</a></li>
+                    <li><a href="{{ url_for('projects') }}" data-en="{{ cv('shared', 'nav_projects') }}" data-bg="{{ cv('shared', 'nav_projects', 'bg') }}">{{ cv('shared', 'nav_projects') }}</a></li>
+                    <li><a href="{{ url_for('contact') }}" data-en="{{ cv('shared', 'nav_contact') }}" data-bg="{{ cv('shared', 'nav_contact', 'bg') }}">{{ cv('shared', 'nav_contact') }}</a></li>
+                </ul>
+                <button id="lang-switch" class="lang-btn" style="margin-left: 20px;">BG</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <h1 data-en="{{ cv('home', 'hero_title') }}" data-bg="{{ cv('home', 'hero_title', 'bg') }}">{{ cv('home', 'hero_title') }}</h1>
+        <p data-en="{{ cv('home', 'hero_subtitle') }}" data-bg="{{ cv('home', 'hero_subtitle', 'bg') }}">{{ cv('home', 'hero_subtitle') }}</p>
+        <div class="hero-cta-group">
+            <a href="{{ url_for('services') }}" class="hero-btn" data-en="{{ cv('home', 'hero_btn_services') }}" data-bg="{{ cv('home', 'hero_btn_services', 'bg') }}">{{ cv('home', 'hero_btn_services') }}</a>
+            <a href="{{ url_for('contact') }}" class="hero-btn hero-btn--outline" data-en="{{ cv('home', 'hero_btn_contact') }}" data-bg="{{ cv('home', 'hero_btn_contact', 'bg') }}">{{ cv('home', 'hero_btn_contact') }}</a>
+        </div>
+    </section>
+
+    <section class="home-stats-bar">
+        <div class="home-stats-inner">
+            <div class="home-stat">
+                <span class="home-stat-num" data-en="{{ cv('home', 'stat1_num') }}" data-bg="{{ cv('home', 'stat1_num', 'bg') }}">{{ cv('home', 'stat1_num') }}</span>
+                <span class="home-stat-label" data-en="{{ cv('home', 'stat1_label') }}" data-bg="{{ cv('home', 'stat1_label', 'bg') }}">{{ cv('home', 'stat1_label') }}</span>
+            </div>
+            <div class="home-stat">
+                <span class="home-stat-num" data-en="{{ cv('home', 'stat2_num') }}" data-bg="{{ cv('home', 'stat2_num', 'bg') }}">{{ cv('home', 'stat2_num') }}</span>
+                <span class="home-stat-label" data-en="{{ cv('home', 'stat2_label') }}" data-bg="{{ cv('home', 'stat2_label', 'bg') }}">{{ cv('home', 'stat2_label') }}</span>
+            </div>
+            <div class="home-stat">
+                <span class="home-stat-num" data-en="{{ cv('home', 'stat3_num') }}" data-bg="{{ cv('home', 'stat3_num', 'bg') }}">{{ cv('home', 'stat3_num') }}</span>
+                <span class="home-stat-label" data-en="{{ cv('home', 'stat3_label') }}" data-bg="{{ cv('home', 'stat3_label', 'bg') }}">{{ cv('home', 'stat3_label') }}</span>
+            </div>
+            <div class="home-stat">
+                <span class="home-stat-num" data-en="{{ cv('home', 'stat4_num') }}" data-bg="{{ cv('home', 'stat4_num', 'bg') }}">{{ cv('home', 'stat4_num') }}</span>
+                <span class="home-stat-label" data-en="{{ cv('home', 'stat4_label') }}" data-bg="{{ cv('home', 'stat4_label', 'bg') }}">{{ cv('home', 'stat4_label') }}</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="activities-section activities-row">
+        <h2 class="activities-title" data-en="{{ cv('home', 'activities_title') }}" data-bg="{{ cv('home', 'activities_title', 'bg') }}">{{ cv('home', 'activities_title') }}</h2>
+        <div class="activities-grid-cards">
+            <a class="activity-card-img" href="{{ url_for('conceptual_technical_working') }}">
+                <img src="{{ url_for('static', filename='images/placeholder1.jpg') }}" alt="Conceptual & Technical Design" loading="lazy">
+                <div class="activity-card-title" data-en="{{ cv('home', 'act1_title') }}" data-bg="{{ cv('home', 'act1_title', 'bg') }}">{{ cv('home', 'act1_title') }}</div>
+                <div class="activity-card-desc" data-en="{{ cv('home', 'act1_desc') }}" data-bg="{{ cv('home', 'act1_desc', 'bg') }}">{{ cv('home', 'act1_desc') }}</div>
+            </a>
+            <a class="activity-card-img" href="{{ url_for('modeling_simulation') }}">
+                <img src="{{ url_for('static', filename='images/placeholder2.jpg') }}" alt="Simulation & Analysis" loading="lazy">
+                <div class="activity-card-title" data-en="{{ cv('home', 'act2_title') }}" data-bg="{{ cv('home', 'act2_title', 'bg') }}">{{ cv('home', 'act2_title') }}</div>
+                <div class="activity-card-desc" data-en="{{ cv('home', 'act2_desc') }}" data-bg="{{ cv('home', 'act2_desc', 'bg') }}">{{ cv('home', 'act2_desc') }}</div>
+            </a>
+            <a class="activity-card-img" href="{{ url_for('strength_analysis') }}">
+                <img src="{{ url_for('static', filename='images/placeholder3.jpg') }}" alt="Structural & Strength Analysis" loading="lazy">
+                <div class="activity-card-title" data-en="{{ cv('home', 'act3_title') }}" data-bg="{{ cv('home', 'act3_title', 'bg') }}">{{ cv('home', 'act3_title') }}</div>
+                <div class="activity-card-desc" data-en="{{ cv('home', 'act3_desc') }}" data-bg="{{ cv('home', 'act3_desc', 'bg') }}">{{ cv('home', 'act3_desc') }}</div>
+            </a>
+            <a class="activity-card-img" href="{{ url_for('design_services') }}">
+                <img src="{{ url_for('static', filename='images/placeholder4.jpg') }}" alt="Custom Mechanical Design" loading="lazy">
+                <div class="activity-card-title" data-en="{{ cv('home', 'act4_title') }}" data-bg="{{ cv('home', 'act4_title', 'bg') }}">{{ cv('home', 'act4_title') }}</div>
+                <div class="activity-card-desc" data-en="{{ cv('home', 'act4_desc') }}" data-bg="{{ cv('home', 'act4_desc', 'bg') }}">{{ cv('home', 'act4_desc') }}</div>
+            </a>
+        </div>
+    </section>
+
+    <section class="activities-section activities-row">
+        <h2 class="activities-title" data-en="{{ cv('home', 'projects_title') }}" data-bg="{{ cv('home', 'projects_title', 'bg') }}">{{ cv('home', 'projects_title') }}</h2>
+        <div class="activities-grid-cards">
+            <a class="activity-card-img" href="{{ url_for('projects') }}">
+                <img src="{{ url_for('static', filename='images/placeholder5.jpg') }}" alt="Project 1" loading="lazy">
+                <div class="activity-card-title" data-en="{{ cv('home', 'proj1_title') }}" data-bg="{{ cv('home', 'proj1_title', 'bg') }}">{{ cv('home', 'proj1_title') }}</div>
+                <div class="activity-card-desc" data-en="{{ cv('home', 'proj1_desc') }}" data-bg="{{ cv('home', 'proj1_desc', 'bg') }}">{{ cv('home', 'proj1_desc') }}</div>
+            </a>
+            <a class="activity-card-img" href="{{ url_for('projects') }}">
+                <img src="{{ url_for('static', filename='images/placeholder6.jpg') }}" alt="Project 2" loading="lazy">
+                <div class="activity-card-title" data-en="{{ cv('home', 'proj2_title') }}" data-bg="{{ cv('home', 'proj2_title', 'bg') }}">{{ cv('home', 'proj2_title') }}</div>
+                <div class="activity-card-desc" data-en="{{ cv('home', 'proj2_desc') }}" data-bg="{{ cv('home', 'proj2_desc', 'bg') }}">{{ cv('home', 'proj2_desc') }}</div>
+            </a>
+            <a class="activity-card-img" href="{{ url_for('projects') }}">
+                <img src="{{ url_for('static', filename='images/placeholder7.jpg') }}" alt="Project 3" loading="lazy">
+                <div class="activity-card-title" data-en="{{ cv('home', 'proj3_title') }}" data-bg="{{ cv('home', 'proj3_title', 'bg') }}">{{ cv('home', 'proj3_title') }}</div>
+                <div class="activity-card-desc" data-en="{{ cv('home', 'proj3_desc') }}" data-bg="{{ cv('home', 'proj3_desc', 'bg') }}">{{ cv('home', 'proj3_desc') }}</div>
+            </a>
+            <a class="activity-card-img" href="{{ url_for('projects') }}">
+                <img src="{{ url_for('static', filename='images/placeholder8.jpg') }}" alt="Project 4" loading="lazy">
+                <div class="activity-card-title" data-en="{{ cv('home', 'proj4_title') }}" data-bg="{{ cv('home', 'proj4_title', 'bg') }}">{{ cv('home', 'proj4_title') }}</div>
+                <div class="activity-card-desc" data-en="{{ cv('home', 'proj4_desc') }}" data-bg="{{ cv('home', 'proj4_desc', 'bg') }}">{{ cv('home', 'proj4_desc') }}</div>
+            </a>
+        </div>
+    </section>
+
+    <section class="home-cta-section">
+        <h2 data-en="{{ cv('home', 'cta_title') }}" data-bg="{{ cv('home', 'cta_title', 'bg') }}">{{ cv('home', 'cta_title') }}</h2>
+        <p data-en="{{ cv('home', 'cta_desc') }}" data-bg="{{ cv('home', 'cta_desc', 'bg') }}">{{ cv('home', 'cta_desc') }}</p>
+        <div class="home-cta-actions">
+            <a href="{{ url_for('contact') }}" class="svc-cta-btn" data-en="{{ cv('home', 'cta_btn') }}" data-bg="{{ cv('home', 'cta_btn', 'bg') }}">{{ cv('home', 'cta_btn') }}</a>
+        </div>
+    </section>
+
+    <button id="scroll-to-top" aria-label="Scroll to top">↑</button>
+
+    <footer>
+        <div class="container">
+            <p data-en="{{ cv('shared', 'footer_text') }}" data-bg="{{ cv('shared', 'footer_text', 'bg') }}">{{ cv('shared', 'footer_text') }}</p>
+            <div style="text-align: center;">
+                <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+                |
+                <a href="{{ url_for('cookie_policy') }}">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookie-consent" style="display: none;">
+        <span>We use cookies to enhance your experience. By continuing to browse, you consent to our use of cookies.</span>
+        <button id="cookie-accept">Accept</button>
+    </div>
+</body>
+</html>

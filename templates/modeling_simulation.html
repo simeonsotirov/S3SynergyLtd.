@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simulation &amp; Analysis — S3 Synergy Ltd</title>
+    <meta name="description" content="State-of-the-art simulation tools for energy transfer and conversion systems — ensuring efficiency and reliability before manufacturing." />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-container">
+        <a href="{{ url_for('home') }}" class="logo-link" aria-label="Go to homepage">
+            <img src="{{ url_for('static', filename='images/logo_S3.png') }}" alt="S3 Synergy Ltd Logo" class="logo-img">
+            <div class="logo-text">
+                <div class="company-name" data-en="{{ cv('shared', 'company_name') }}" data-bg="{{ cv('shared', 'company_name', 'bg') }}">{{ cv('shared', 'company_name') }}</div>
+                <div class="slogan" data-en="{{ cv('shared', 'slogan') }}" data-bg="{{ cv('shared', 'slogan', 'bg') }}">{{ cv('shared', 'slogan') }}</div>
+            </div>
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}" data-en="{{ cv('shared', 'nav_home') }}" data-bg="{{ cv('shared', 'nav_home', 'bg') }}">{{ cv('shared', 'nav_home') }}</a></li>
+                <li><a href="{{ url_for('services') }}" class="active" data-en="{{ cv('shared', 'nav_services') }}" data-bg="{{ cv('shared', 'nav_services', 'bg') }}">{{ cv('shared', 'nav_services') }}</a></li>
+                <li><a href="{{ url_for('projects') }}" data-en="{{ cv('shared', 'nav_projects') }}" data-bg="{{ cv('shared', 'nav_projects', 'bg') }}">{{ cv('shared', 'nav_projects') }}</a></li>
+                <li><a href="{{ url_for('contact') }}" data-en="{{ cv('shared', 'nav_contact') }}" data-bg="{{ cv('shared', 'nav_contact', 'bg') }}">{{ cv('shared', 'nav_contact') }}</a></li>
+            </ul>
+            <button id="lang-switch" class="lang-btn" style="margin-left:20px;">BG</button>
+        </div>
+    </div>
+</nav>
+
+<nav class="svc-breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+        <a href="{{ url_for('home') }}" data-en="{{ cv('shared', 'nav_home') }}" data-bg="{{ cv('shared', 'nav_home', 'bg') }}">{{ cv('shared', 'nav_home') }}</a>
+        <span>›</span>
+        <a href="{{ url_for('services') }}" data-en="{{ cv('shared', 'nav_services') }}" data-bg="{{ cv('shared', 'nav_services', 'bg') }}">{{ cv('shared', 'nav_services') }}</a>
+        <span>›</span>
+        <span data-en="{{ cv('modeling', 'hero_title') }}" data-bg="{{ cv('modeling', 'hero_title', 'bg') }}">{{ cv('modeling', 'hero_title') }}</span>
+    </div>
+</nav>
+
+<section class="svc-hero">
+    <div class="svc-hero-bg" style="background-image: url({{ url_for('static', filename='images/services.jpg') }});"></div>
+    <div class="svc-hero-overlay" style="background: linear-gradient(160deg, rgba(18,32,48,0.93) 0%, rgba(44,70,90,0.72) 100%);"></div>
+    <div class="svc-hero-content">
+        <span class="svc-hero-eyebrow" data-en="{{ cv('modeling', 'hero_eyebrow') }}" data-bg="{{ cv('modeling', 'hero_eyebrow', 'bg') }}">{{ cv('modeling', 'hero_eyebrow') }}</span>
+        <h1 data-en="{{ cv('modeling', 'hero_title') }}" data-bg="{{ cv('modeling', 'hero_title', 'bg') }}">{{ cv('modeling', 'hero_title') }}</h1>
+        <p data-en="{{ cv('modeling', 'hero_desc') }}" data-bg="{{ cv('modeling', 'hero_desc', 'bg') }}">
+            {{ cv('modeling', 'hero_desc') }}
+        </p>
+    </div>
+</section>
+
+<section class="svc-intro-wide">
+    <div class="svc-intro-wide-inner">
+        <h2 data-en="{{ cv('modeling', 'intro_h2') }}" data-bg="{{ cv('modeling', 'intro_h2', 'bg') }}">{{ cv('modeling', 'intro_h2') }}</h2>
+        <p data-en="{{ cv('modeling', 'intro_p1') }}" data-bg="{{ cv('modeling', 'intro_p1', 'bg') }}">
+            {{ cv('modeling', 'intro_p1') }}
+        </p>
+        <p data-en="{{ cv('modeling', 'intro_p2') }}" data-bg="{{ cv('modeling', 'intro_p2', 'bg') }}">
+            {{ cv('modeling', 'intro_p2') }}
+        </p>
+        <div class="svc-feature-grid">
+            <div class="svc-feature-item" data-en="{{ cv('modeling', 'feat1') }}" data-bg="{{ cv('modeling', 'feat1', 'bg') }}">{{ cv('modeling', 'feat1') }}</div>
+            <div class="svc-feature-item" data-en="{{ cv('modeling', 'feat2') }}" data-bg="{{ cv('modeling', 'feat2', 'bg') }}">{{ cv('modeling', 'feat2') }}</div>
+            <div class="svc-feature-item" data-en="{{ cv('modeling', 'feat3') }}" data-bg="{{ cv('modeling', 'feat3', 'bg') }}">{{ cv('modeling', 'feat3') }}</div>
+            <div class="svc-feature-item" data-en="{{ cv('modeling', 'feat4') }}" data-bg="{{ cv('modeling', 'feat4', 'bg') }}">{{ cv('modeling', 'feat4') }}</div>
+            <div class="svc-feature-item" data-en="{{ cv('modeling', 'feat5') }}" data-bg="{{ cv('modeling', 'feat5', 'bg') }}">{{ cv('modeling', 'feat5') }}</div>
+            <div class="svc-feature-item" data-en="{{ cv('modeling', 'feat6') }}" data-bg="{{ cv('modeling', 'feat6', 'bg') }}">{{ cv('modeling', 'feat6') }}</div>
+        </div>
+    </div>
+</section>
+
+<section style="background:#f5f7f9; padding:80px 20px;">
+    <div class="svc-section-header">
+        <h2 data-en="{{ cv('modeling', 'caps_h2') }}" data-bg="{{ cv('modeling', 'caps_h2', 'bg') }}">{{ cv('modeling', 'caps_h2') }}</h2>
+        <p data-en="{{ cv('modeling', 'caps_p') }}" data-bg="{{ cv('modeling', 'caps_p', 'bg') }}">{{ cv('modeling', 'caps_p') }}</p>
+    </div>
+    <div class="svc-alt-caps">
+        <div class="svc-alt-cap">
+            <div class="svc-alt-cap-title" data-en="{{ cv('modeling', 'cap1_title') }}" data-bg="{{ cv('modeling', 'cap1_title', 'bg') }}">{{ cv('modeling', 'cap1_title') }}</div>
+            <div class="svc-alt-cap-body" data-en="{{ cv('modeling', 'cap1_body') }}" data-bg="{{ cv('modeling', 'cap1_body', 'bg') }}">{{ cv('modeling', 'cap1_body') }}</div>
+        </div>
+        <div class="svc-alt-cap">
+            <div class="svc-alt-cap-title" data-en="{{ cv('modeling', 'cap2_title') }}" data-bg="{{ cv('modeling', 'cap2_title', 'bg') }}">{{ cv('modeling', 'cap2_title') }}</div>
+            <div class="svc-alt-cap-body" data-en="{{ cv('modeling', 'cap2_body') }}" data-bg="{{ cv('modeling', 'cap2_body', 'bg') }}">{{ cv('modeling', 'cap2_body') }}</div>
+        </div>
+        <div class="svc-alt-cap">
+            <div class="svc-alt-cap-title" data-en="{{ cv('modeling', 'cap3_title') }}" data-bg="{{ cv('modeling', 'cap3_title', 'bg') }}">{{ cv('modeling', 'cap3_title') }}</div>
+            <div class="svc-alt-cap-body" data-en="{{ cv('modeling', 'cap3_body') }}" data-bg="{{ cv('modeling', 'cap3_body', 'bg') }}">{{ cv('modeling', 'cap3_body') }}</div>
+        </div>
+        <div class="svc-alt-cap">
+            <div class="svc-alt-cap-title" data-en="{{ cv('modeling', 'cap4_title') }}" data-bg="{{ cv('modeling', 'cap4_title', 'bg') }}">{{ cv('modeling', 'cap4_title') }}</div>
+            <div class="svc-alt-cap-body" data-en="{{ cv('modeling', 'cap4_body') }}" data-bg="{{ cv('modeling', 'cap4_body', 'bg') }}">{{ cv('modeling', 'cap4_body') }}</div>
+        </div>
+        <div class="svc-alt-cap">
+            <div class="svc-alt-cap-title" data-en="{{ cv('modeling', 'cap5_title') }}" data-bg="{{ cv('modeling', 'cap5_title', 'bg') }}">{{ cv('modeling', 'cap5_title') }}</div>
+            <div class="svc-alt-cap-body" data-en="{{ cv('modeling', 'cap5_body') }}" data-bg="{{ cv('modeling', 'cap5_body', 'bg') }}">{{ cv('modeling', 'cap5_body') }}</div>
+        </div>
+        <div class="svc-alt-cap">
+            <div class="svc-alt-cap-title" data-en="{{ cv('modeling', 'cap6_title') }}" data-bg="{{ cv('modeling', 'cap6_title', 'bg') }}">{{ cv('modeling', 'cap6_title') }}</div>
+            <div class="svc-alt-cap-body" data-en="{{ cv('modeling', 'cap6_body') }}" data-bg="{{ cv('modeling', 'cap6_body', 'bg') }}">{{ cv('modeling', 'cap6_body') }}</div>
+        </div>
+    </div>
+</section>
+
+<section style="background:#fff; padding:80px 20px;">
+    <div class="svc-section-header">
+        <h2 data-en="{{ cv('modeling', 'steps_h2') }}" data-bg="{{ cv('modeling', 'steps_h2', 'bg') }}">{{ cv('modeling', 'steps_h2') }}</h2>
+        <p data-en="{{ cv('modeling', 'steps_p') }}" data-bg="{{ cv('modeling', 'steps_p', 'bg') }}">{{ cv('modeling', 'steps_p') }}</p>
+    </div>
+    <div class="svc-compact-steps">
+        <div class="svc-compact-step">
+            <span class="svc-compact-step-num">01</span>
+            <h3 data-en="{{ cv('modeling', 'step1_h3') }}" data-bg="{{ cv('modeling', 'step1_h3', 'bg') }}">{{ cv('modeling', 'step1_h3') }}</h3>
+            <p data-en="{{ cv('modeling', 'step1_p') }}" data-bg="{{ cv('modeling', 'step1_p', 'bg') }}">{{ cv('modeling', 'step1_p') }}</p>
+        </div>
+        <div class="svc-compact-step">
+            <span class="svc-compact-step-num">02</span>
+            <h3 data-en="{{ cv('modeling', 'step2_h3') }}" data-bg="{{ cv('modeling', 'step2_h3', 'bg') }}">{{ cv('modeling', 'step2_h3') }}</h3>
+            <p data-en="{{ cv('modeling', 'step2_p') }}" data-bg="{{ cv('modeling', 'step2_p', 'bg') }}">{{ cv('modeling', 'step2_p') }}</p>
+        </div>
+        <div class="svc-compact-step">
+            <span class="svc-compact-step-num">03</span>
+            <h3 data-en="{{ cv('modeling', 'step3_h3') }}" data-bg="{{ cv('modeling', 'step3_h3', 'bg') }}">{{ cv('modeling', 'step3_h3') }}</h3>
+            <p data-en="{{ cv('modeling', 'step3_p') }}" data-bg="{{ cv('modeling', 'step3_p', 'bg') }}">{{ cv('modeling', 'step3_p') }}</p>
+        </div>
+        <div class="svc-compact-step">
+            <span class="svc-compact-step-num">04</span>
+            <h3 data-en="{{ cv('modeling', 'step4_h3') }}" data-bg="{{ cv('modeling', 'step4_h3', 'bg') }}">{{ cv('modeling', 'step4_h3') }}</h3>
+            <p data-en="{{ cv('modeling', 'step4_p') }}" data-bg="{{ cv('modeling', 'step4_p', 'bg') }}">{{ cv('modeling', 'step4_p') }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="svc-standards">
+    <h3 data-en="{{ cv('modeling', 'std_h3') }}" data-bg="{{ cv('modeling', 'std_h3', 'bg') }}">{{ cv('modeling', 'std_h3') }}</h3>
+    <div class="svc-standards-list">
+        <span class="svc-std-tag">ANSYS Fluent</span>
+        <span class="svc-std-tag">ANSYS Mechanical</span>
+        <span class="svc-std-tag">OpenFOAM</span>
+        <span class="svc-std-tag">MATLAB / Simulink</span>
+        <span class="svc-std-tag">COMSOL Multiphysics</span>
+        <span class="svc-std-tag">EN 13480</span>
+        <span class="svc-std-tag">ISO 15663</span>
+        <span class="svc-std-tag">ASME PTC</span>
+    </div>
+</section>
+
+<section class="svc-cta">
+    <h2 data-en="{{ cv('modeling', 'cta_h2') }}" data-bg="{{ cv('modeling', 'cta_h2', 'bg') }}">{{ cv('modeling', 'cta_h2') }}</h2>
+    <p data-en="{{ cv('modeling', 'cta_p') }}" data-bg="{{ cv('modeling', 'cta_p', 'bg') }}">
+        {{ cv('modeling', 'cta_p') }}
+    </p>
+    <div class="svc-cta-actions">
+        <a href="{{ url_for('contact') }}" class="svc-cta-btn" data-en="{{ cv('modeling', 'cta_btn1') }}" data-bg="{{ cv('modeling', 'cta_btn1', 'bg') }}">{{ cv('modeling', 'cta_btn1') }}</a>
+        <a href="{{ url_for('services') }}" class="svc-cta-secondary" data-en="{{ cv('modeling', 'cta_btn2') }}" data-bg="{{ cv('modeling', 'cta_btn2', 'bg') }}">{{ cv('modeling', 'cta_btn2') }}</a>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p data-en="{{ cv('shared', 'footer_text') }}" data-bg="{{ cv('shared', 'footer_text', 'bg') }}">{{ cv('shared', 'footer_text') }}</p>
+        <div style="text-align:center;">
+            <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>S3 Synergy Ltd - Our Services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Discover our range of engineering services from conceptual planning to detailed technical designs tailored for your business." />
+    <meta name="keywords" content="engineering, conceptual design, technical projects, simulation, analysis, design services" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="{{ url_for('home') }}" class="logo-link" aria-label="Go to homepage">
+                <img src="{{ url_for('static', filename='images/logo_S3.png') }}" alt="S3 Synergy Ltd Logo" class="logo-img">
+                <div class="logo-text">
+                    <div class="company-name" data-en="{{ cv('shared', 'company_name') }}" data-bg="{{ cv('shared', 'company_name', 'bg') }}">{{ cv('shared', 'company_name') }}</div>
+                    <div class="slogan" data-en="{{ cv('shared', 'slogan') }}" data-bg="{{ cv('shared', 'slogan', 'bg') }}">{{ cv('shared', 'slogan') }}</div>
+                </div>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}" data-en="{{ cv('shared', 'nav_home') }}" data-bg="{{ cv('shared', 'nav_home', 'bg') }}">{{ cv('shared', 'nav_home') }}</a></li>
+                    <li><a href="{{ url_for('services') }}" class="active" data-en="{{ cv('shared', 'nav_services') }}" data-bg="{{ cv('shared', 'nav_services', 'bg') }}">{{ cv('shared', 'nav_services') }}</a></li>
+                    <li><a href="{{ url_for('projects') }}" data-en="{{ cv('shared', 'nav_projects') }}" data-bg="{{ cv('shared', 'nav_projects', 'bg') }}">{{ cv('shared', 'nav_projects') }}</a></li>
+                    <li><a href="{{ url_for('contact') }}" data-en="{{ cv('shared', 'nav_contact') }}" data-bg="{{ cv('shared', 'nav_contact', 'bg') }}">{{ cv('shared', 'nav_contact') }}</a></li>
+                </ul>
+                <button id="lang-switch" class="lang-btn" style="margin-left: 20px;">BG</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url({{ url_for('static', filename='images/services.jpg') }}) no-repeat center center; background-size: cover;">
+        <h1 data-en="{{ cv('services', 'hero_title') }}" data-bg="{{ cv('services', 'hero_title', 'bg') }}">{{ cv('services', 'hero_title') }}</h1>
+        <p data-en="{{ cv('services', 'hero_subtitle') }}" data-bg="{{ cv('services', 'hero_subtitle', 'bg') }}">{{ cv('services', 'hero_subtitle') }}</p>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <div class="services-grid">
+                <a href="{{ url_for('conceptual_technical_working') }}" style="text-decoration:none; color:inherit;">
+                    <div class="service-card">
+                        <h2 data-en="{{ cv('services', 'svc1_title') }}" data-bg="{{ cv('services', 'svc1_title', 'bg') }}">{{ cv('services', 'svc1_title') }}</h2>
+                        <p data-en="{{ cv('services', 'svc1_desc') }}" data-bg="{{ cv('services', 'svc1_desc', 'bg') }}">{{ cv('services', 'svc1_desc') }}</p>
+                    </div>
+                </a>
+                <a href="{{ url_for('modeling_simulation') }}" style="text-decoration:none; color:inherit;">
+                    <div class="service-card">
+                        <h2 data-en="{{ cv('services', 'svc2_title') }}" data-bg="{{ cv('services', 'svc2_title', 'bg') }}">{{ cv('services', 'svc2_title') }}</h2>
+                        <p data-en="{{ cv('services', 'svc2_desc') }}" data-bg="{{ cv('services', 'svc2_desc', 'bg') }}">{{ cv('services', 'svc2_desc') }}</p>
+                    </div>
+                </a>
+                <a href="{{ url_for('strength_analysis') }}" style="text-decoration:none; color:inherit;">
+                    <div class="service-card">
+                        <h2 data-en="{{ cv('services', 'svc3_title') }}" data-bg="{{ cv('services', 'svc3_title', 'bg') }}">{{ cv('services', 'svc3_title') }}</h2>
+                        <p data-en="{{ cv('services', 'svc3_desc') }}" data-bg="{{ cv('services', 'svc3_desc', 'bg') }}">{{ cv('services', 'svc3_desc') }}</p>
+                    </div>
+                </a>
+                <a href="{{ url_for('design_services') }}" style="text-decoration:none; color:inherit;">
+                    <div class="service-card">
+                        <h2 data-en="{{ cv('services', 'svc4_title') }}" data-bg="{{ cv('services', 'svc4_title', 'bg') }}">{{ cv('services', 'svc4_title') }}</h2>
+                        <p data-en="{{ cv('services', 'svc4_desc') }}" data-bg="{{ cv('services', 'svc4_desc', 'bg') }}">{{ cv('services', 'svc4_desc') }}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p data-en="{{ cv('shared', 'footer_text') }}" data-bg="{{ cv('shared', 'footer_text', 'bg') }}">{{ cv('shared', 'footer_text') }}</p>
+            <div style="text-align: center;">
+                <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+                |
+                <a href="{{ url_for('cookie_policy') }}">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookie-consent" style="display: none;">
+        <span>We use cookies to enhance your experience. By continuing to browse, you consent to our use of cookies.</span>
+        <button id="cookie-accept">Accept</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin — Edit Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: #1e2d3a; }
+        .admin-header { background: #1e2d3a; color: #fff; padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+        .admin-header h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; margin: 0; }
+        .admin-header a { color: #8ab4d4; font-size: 0.88rem; text-decoration: none; }
+        .admin-header a:hover { color: #fff; }
+        .admin-body { display: flex; min-height: calc(100vh - 56px); }
+        .sidebar { width: 200px; background: #fff; border-right: 1px solid #d8dde4; padding: 24px 0; flex-shrink: 0; }
+        .sidebar a { display: block; padding: 10px 24px; font-size: 0.92rem; color: #3a4a5c; text-decoration: none; border-left: 3px solid transparent; transition: background 0.15s, border-color 0.15s; }
+        .sidebar a:hover { background: #f0f2f5; }
+        .sidebar a.active { background: #e8f0fe; border-left-color: #2a7ae2; color: #2a7ae2; font-weight: 600; }
+        .main { flex: 1; padding: 32px 40px; max-width: 800px; }
+        .main h2 { font-size: 1.25rem; margin: 0 0 6px; }
+        .page-hint { color: #6b7a8d; font-size: 0.88rem; margin-bottom: 28px; }
+        .edit-form { background: #fff; border: 1px solid #d8dde4; border-radius: 8px; padding: 24px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 4px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label { font-size: 0.8rem; font-weight: 600; color: #3a4a5c; }
+        .form-group input, .form-group textarea { padding: 8px 10px; border: 1.5px solid #d1d9e0; border-radius: 5px; font-size: 0.93rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+        .form-group input:focus, .form-group textarea:focus { border-color: #2a7ae2; }
+        .form-group textarea { resize: vertical; min-height: 60px; }
+        .current-img { margin-top: 6px; }
+        .current-img img { width: 120px; height: 84px; object-fit: cover; border-radius: 5px; border: 1px solid #d8dde4; display: block; }
+        .current-img span { font-size: 0.78rem; color: #8a9ab0; display: block; margin-top: 4px; }
+        .form-actions { margin-top: 20px; display: flex; gap: 12px; align-items: center; }
+        .btn-primary { background: #2a7ae2; color: #fff; border: none; border-radius: 6px; padding: 9px 28px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .btn-primary:hover { background: #1b5fbe; }
+        .btn-secondary { background: #fff; color: #3a4a5c; border: 1.5px solid #d1d9e0; border-radius: 6px; padding: 8px 20px; font-size: 0.95rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+        .btn-secondary:hover { background: #f0f2f5; }
+        @media (max-width: 700px) {
+            .admin-body { flex-direction: column; }
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #d8dde4; padding: 10px 0; display: flex; flex-wrap: wrap; }
+            .sidebar a { padding: 8px 14px; border-left: none; border-bottom: 3px solid transparent; }
+            .sidebar a.active { border-bottom-color: #2a7ae2; border-left-color: transparent; }
+            .main { padding: 20px 16px; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <h1>S3 Synergy — Admin</h1>
+        <form method="POST" action="{{ url_for('admin_logout') }}" style="display:inline;margin:0">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" style="background:none;border:none;color:#8ab4d4;font-size:0.88rem;cursor:pointer;padding:0">Sign out</button>
+        </form>
+    </div>
+    <div class="admin-body">
+        <nav class="sidebar">
+            <a href="{{ url_for('admin_dashboard') }}">Content Pages</a>
+            <a href="{{ url_for('admin_projects') }}" class="active" style="margin-top: 12px; border-top: 1px solid #d8dde4; padding-top: 14px;">Manage Projects</a>
+        </nav>
+        <div class="main">
+            <h2>Edit Project</h2>
+            <p class="page-hint">Update the project details below. Leave the image field empty to keep the current image.</p>
+
+            <div class="edit-form">
+                <form method="POST" action="{{ url_for('admin_projects_edit', project_id=project.id) }}" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Tag (English)</label>
+                            <input type="text" name="tag_en" value="{{ project.tag_en }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Tag (Bulgarian)</label>
+                            <input type="text" name="tag_bg" value="{{ project.tag_bg }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Title (English)</label>
+                            <input type="text" name="title_en" value="{{ project.title_en }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Title (Bulgarian)</label>
+                            <input type="text" name="title_bg" value="{{ project.title_bg }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Date (English)</label>
+                            <input type="text" name="date_en" value="{{ project.date_en }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Date (Bulgarian)</label>
+                            <input type="text" name="date_bg" value="{{ project.date_bg }}">
+                        </div>
+                        <div class="form-group full">
+                            <label>Description (English)</label>
+                            <textarea name="desc_en" rows="3">{{ project.desc_en }}</textarea>
+                        </div>
+                        <div class="form-group full">
+                            <label>Description (Bulgarian)</label>
+                            <textarea name="desc_bg" rows="3">{{ project.desc_bg }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Sort Order</label>
+                            <input type="number" name="sort_order" value="{{ project.sort_order }}" min="0">
+                        </div>
+                        <div class="form-group full">
+                            <label>Replace Image</label>
+                            <input type="file" name="image" accept="image/*">
+                            {% if project.image_filename %}
+                            <div class="current-img">
+                                <img src="{{ url_for('static', filename=project.image_filename) }}" alt="Current image">
+                                <span>Current image</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Save Changes</button>
+                        <a href="{{ url_for('admin_projects') }}" class="btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>S3 Synergy Ltd - Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Contact S3 Synergy Ltd for innovative engineering solutions." />
+    <meta name="keywords" content="contact, engineering, solutions, support" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="{{ url_for('home') }}" class="logo-link" aria-label="Go to homepage">
+                <img src="{{ url_for('static', filename='images/logo_S3.png') }}" alt="S3 Synergy Ltd Logo" class="logo-img">
+                <div class="logo-text">
+                    <div class="company-name" data-en="{{ cv('shared', 'company_name') }}" data-bg="{{ cv('shared', 'company_name', 'bg') }}">{{ cv('shared', 'company_name') }}</div>
+                    <div class="slogan" data-en="{{ cv('shared', 'slogan') }}" data-bg="{{ cv('shared', 'slogan', 'bg') }}">{{ cv('shared', 'slogan') }}</div>
+                </div>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}" data-en="{{ cv('shared', 'nav_home') }}" data-bg="{{ cv('shared', 'nav_home', 'bg') }}">{{ cv('shared', 'nav_home') }}</a></li>
+                    <li><a href="{{ url_for('services') }}" data-en="{{ cv('shared', 'nav_services') }}" data-bg="{{ cv('shared', 'nav_services', 'bg') }}">{{ cv('shared', 'nav_services') }}</a></li>
+                    <li><a href="{{ url_for('projects') }}" data-en="{{ cv('shared', 'nav_projects') }}" data-bg="{{ cv('shared', 'nav_projects', 'bg') }}">{{ cv('shared', 'nav_projects') }}</a></li>
+                    <li><a href="{{ url_for('contact') }}" class="active" data-en="{{ cv('shared', 'nav_contact') }}" data-bg="{{ cv('shared', 'nav_contact', 'bg') }}">{{ cv('shared', 'nav_contact') }}</a></li>
+                </ul>
+                <button id="lang-switch" class="lang-btn" style="margin-left: 20px;">BG</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="about-section">
+        <div class="container">
+            <h2 data-en="{{ cv('contact', 'page_title') }}" data-bg="{{ cv('contact', 'page_title', 'bg') }}">{{ cv('contact', 'page_title') }}</h2>
+            <p data-en="{{ cv('contact', 'page_desc') }}" data-bg="{{ cv('contact', 'page_desc', 'bg') }}">{{ cv('contact', 'page_desc') }}</p>
+            <div class="contact-info" style="margin-top:20px; text-align:center; color:#333;">
+                <p>
+                    <span data-en="{{ cv('contact', 'phone_label') }}" data-bg="{{ cv('contact', 'phone_label', 'bg') }}">{{ cv('contact', 'phone_label') }}</span>
+                    <strong style="color:#333;" data-en="{{ cv('contact', 'phone_value') }}" data-bg="{{ cv('contact', 'phone_value', 'bg') }}">{{ cv('contact', 'phone_value') }}</strong>
+                </p>
+                <p>
+                    <span data-en="{{ cv('contact', 'email_label') }}" data-bg="{{ cv('contact', 'email_label', 'bg') }}">{{ cv('contact', 'email_label') }}</span>
+                    <strong style="color:#333;" data-en="{{ cv('contact', 'email_value') }}" data-bg="{{ cv('contact', 'email_value', 'bg') }}">{{ cv('contact', 'email_value') }}</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p data-en="{{ cv('shared', 'footer_text') }}" data-bg="{{ cv('shared', 'footer_text', 'bg') }}">{{ cv('shared', 'footer_text') }}</p>
+            <div style="text-align: center;">
+                <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+                |
+                <a href="{{ url_for('cookie_policy') }}">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cookie-consent" style="display: none;">
+        <span>We use cookies to enhance your experience. By continuing to browse, you consent to our use of cookies.</span>
+        <button id="cookie-accept">Accept</button>
+    </div>
+</body>
+</html>
