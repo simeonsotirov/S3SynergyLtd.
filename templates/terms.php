@@ -6,17 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Terms and Conditions for S3 Synergy Ltd. Please read these terms carefully." />
     <meta name="keywords" content="terms, conditions, policy, legal, privacy, cookies, governing law" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js" defer></script>
     <!-- ...existing styles moved to style.css... -->
+    <?= site_css_vars() ?>
 </head>
 <body>
     <!-- Full Home Page Navbar Copied -->
     <nav class="navbar">
         <div class="container nav-container">
             <!-- Logo + firm name + slogan -->
-            <a href="{{ url_for('home') }}" class="logo-link" aria-label="Go to homepage">
-                <img src="{{ url_for('static', filename='images/logo_S3.png') }}" alt="S3 Synergy Ltd Logo" class="logo-img">
+            <a href="/" class="logo-link" aria-label="Go to homepage">
+                <img src="<?= e(site_img('logo')) ?>" alt="S3 Synergy Ltd Logo" class="logo-img">
                 <div class="logo-text">
                     <div class="company-name" data-en="S3 Synergy" data-bg="S3 Синерджи">S3 Synergy</div>
                     <div class="slogan" data-en="Driven by Innovation, Defined by Quality." data-bg="Водени от иновации, определени от качество.">
@@ -28,10 +29,10 @@
             <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
             <div class="nav-right">
                 <ul class="nav-links">
-                    <li><a href="{{ url_for('home') }}" class="active" data-en="Home" data-bg="Начало">Home</a></li>
-                    <li><a href="{{ url_for('services') }}" data-en="Services" data-bg="Услуги">Services</a></li>
-                    <li><a href="{{ url_for('projects') }}" data-en="Projects" data-bg="Проекти">Projects</a></li>
-                    <li><a href="{{ url_for('contact') }}" data-en="Contact" data-bg="Контакт">Contact</a></li>
+                    <li><a href="/" class="active" data-en="Home" data-bg="Начало">Home</a></li>
+                    <li><a href="/services" data-en="Services" data-bg="Услуги">Services</a></li>
+                    <li><a href="/projects" data-en="Projects" data-bg="Проекти">Projects</a></li>
+                    <li><a href="/contact" data-en="Contact" data-bg="Контакт">Contact</a></li>
                 </ul>
 
                 <!-- Language button -->
@@ -110,9 +111,9 @@
         <div class="container">
             <p>© 2025 S3 Synergy Ltd. All rights reserved. Website made by S. Sotirov.</p>
             <div style="text-align: center;">
-                <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+                <a href="/terms">Terms and Conditions</a>
                 |
-                <a href="{{ url_for('cookie_policy') }}">Cookie Policy</a>
+                <a href="/cookie-policy">Cookie Policy</a>
             </div>
         </div>
     </footer>

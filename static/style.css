@@ -412,7 +412,7 @@ a {
 .hero-section,
 .hero,
 .fullwidth-hero {
-    background: url("/static/images/img.jpg") no-repeat center center fixed;
+    background: var(--hero-bg, url("/static/images/img.jpg")) no-repeat center center fixed;
     background-size: cover;
     color: white;
     text-align: center;
@@ -1971,4 +1971,10 @@ a.activity-card-img:hover {
     .proj-grid-section { padding: 40px 16px; }
     .proj-card-body { padding: 18px 18px 22px 18px; }
     .proj-card-title { font-size: 0.95rem; }
+}
+
+.svc-cta-btn,
+.activities-grid-cards,
+.activity-card-img {
+    box-sizing: border-box;
 }

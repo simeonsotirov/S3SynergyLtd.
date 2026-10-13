@@ -18,6 +18,9 @@
         .sidebar a.active { background: #e8f0fe; border-left-color: #2a7ae2; color: #2a7ae2; font-weight: 600; }
         .main { flex: 1; padding: 32px 40px; }
         .main h2 { font-size: 1.25rem; margin: 0 0 6px; }
+        .main { min-width: 0; }
+        .form-group { min-width: 0; }
+        .table-wrap { overflow-x: auto; }
         .page-hint { color: #6b7a8d; font-size: 0.88rem; margin-bottom: 28px; }
         .flash-ok { background: #e6f9ee; border: 1px solid #7dce9d; color: #1a6636; border-radius: 6px; padding: 10px 16px; margin-bottom: 20px; font-size: 0.93rem; }
         .add-form { background: #fff; border: 1px solid #d8dde4; border-radius: 8px; padding: 24px; margin-bottom: 32px; }
@@ -44,6 +47,11 @@
         .proj-thumb-placeholder { width: 60px; height: 42px; background: #d8dde4; border-radius: 4px; }
         .proj-tag-badge { display: inline-block; background: #e8f0fe; color: #2a7ae2; border-radius: 4px; padding: 2px 8px; font-size: 0.78rem; font-weight: 600; }
         .actions-cell { display: flex; gap: 8px; align-items: center; }
+        .order-cell { display: flex; gap: 4px; align-items: center; }
+        .btn-move { background: #fff; border: 1.5px solid #d1d9e0; border-radius: 4px; width: 28px; height: 28px; cursor: pointer; font-size: 0.8rem; color: #3a4a5c; padding: 0; }
+        .btn-move:hover:not(:disabled) { background: #e8f0fe; border-color: #2a7ae2; }
+        .btn-move:disabled { opacity: 0.35; cursor: default; }
+        .btn-secondary { background: #fff; color: #3a4a5c; border: 1.5px solid #d1d9e0; border-radius: 6px; padding: 8px 20px; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
         @media (max-width: 700px) {
             .admin-body { flex-direction: column; }
             .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #d8dde4; padding: 10px 0; display: flex; flex-wrap: wrap; }
@@ -53,36 +61,34 @@
             .form-grid { grid-template-columns: 1fr; }
         }
     </style>
+    <script src="/static/admin.js" defer></script>
 </head>
 <body>
     <div class="admin-header">
         <h1>S3 Synergy — Admin</h1>
-        <form method="POST" action="{{ url_for('admin_logout') }}" style="display:inline;margin:0">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <form method="POST" action="/admin/logout" style="display:inline;margin:0">
+            <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
             <button type="submit" style="background:none;border:none;color:#8ab4d4;font-size:0.88rem;cursor:pointer;padding:0">Sign out</button>
         </form>
     </div>
     <div class="admin-body">
         <nav class="sidebar">
-            <a href="{{ url_for('admin_dashboard') }}">Content Pages</a>
-            <a href="{{ url_for('admin_projects') }}" class="active" style="margin-top: 12px; border-top: 1px solid #d8dde4; padding-top: 14px;">Manage Projects</a>
+            <a href="/admin">Content Pages</a>
+            <a href="/admin/projects" class="active" style="margin-top: 12px; border-top: 1px solid #d8dde4; padding-top: 14px;">Manage Projects</a>
+            <a href="/admin/images">Site Images</a>
         </nav>
         <div class="main">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for msg in messages %}
-                        <div class="flash-ok">{{ msg }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
+            <?php foreach (get_flashed_messages() as $msg): ?>
+                <div class="flash-ok"><?= e($msg) ?></div>
+            <?php endforeach; ?>
 
             <h2>Manage Projects</h2>
             <p class="page-hint">Add, edit, or remove project cards shown on the Projects page.</p>
 
             <div class="add-form">
                 <h3>Add New Project</h3>
-                <form method="POST" action="{{ url_for('admin_projects_add') }}" enctype="multipart/form-data">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <form method="POST" action="/admin/projects/add" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Tag (English)</label>
@@ -118,7 +124,8 @@
                         </div>
                         <div class="form-group full">
                             <label>Project Image</label>
-                            <input type="file" name="image" accept="image/*">
+                            <input type="file" name="image" accept="image/jpeg,image/png,image/gif,image/webp" data-preview="add-preview">
+                            <img id="add-preview" alt="" style="display:none;width:160px;height:112px;object-fit:cover;border-radius:5px;border:1px solid #d8dde4;margin-top:6px">
                         </div>
                     </div>
                     <div class="form-actions">
@@ -127,7 +134,8 @@
                 </form>
             </div>
 
-            {% if projects %}
+            <?php if ($projects): ?>
+            <div class="table-wrap">
             <table class="projects-table">
                 <thead>
                     <tr>
@@ -140,35 +148,46 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for p in projects %}
+                    <?php foreach (array_values($projects) as $i => $p): ?>
                     <tr>
                         <td>
-                            {% if p.image_filename %}
-                            <img src="{{ url_for('static', filename=p.image_filename) }}" alt="" class="proj-thumb">
-                            {% else %}
+                            <?php if ($p['image_filename']): ?>
+                            <img src="<?= e('/static/' . $p['image_filename']) ?>" alt="" class="proj-thumb">
+                            <?php else: ?>
                             <div class="proj-thumb-placeholder"></div>
-                            {% endif %}
+                            <?php endif; ?>
                         </td>
-                        <td><span class="proj-tag-badge">{{ p.tag_en }}</span></td>
-                        <td>{{ p.title_en }}</td>
-                        <td>{{ p.date_en }}</td>
-                        <td>{{ p.sort_order }}</td>
+                        <td><span class="proj-tag-badge"><?= e($p['tag_en']) ?></span></td>
+                        <td><?= e($p['title_en']) ?></td>
+                        <td><?= e($p['date_en']) ?></td>
+                        <td>
+                            <div class="order-cell">
+                                <?php foreach (['up' => ['▲', $i === 0], 'down' => ['▼', $i === count($projects) - 1]] as $dir => [$glyph, $disabled]): ?>
+                                <form method="POST" action="/admin/projects/<?= (int) $p['id'] ?>/move" style="margin:0">
+                                    <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
+                                    <input type="hidden" name="direction" value="<?= $dir ?>">
+                                    <button type="submit" class="btn-move" <?= $disabled ? 'disabled' : '' ?> aria-label="Move <?= $dir ?>"><?= $glyph ?></button>
+                                </form>
+                                <?php endforeach; ?>
+                            </div>
+                        </td>
                         <td>
                             <div class="actions-cell">
-                                <a href="{{ url_for('admin_projects_edit', project_id=p.id) }}" class="btn-edit">Edit</a>
-                                <form method="POST" action="{{ url_for('admin_projects_delete', project_id=p.id) }}" onsubmit="return confirm('Delete this project?')">
-                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <a href="<?= e(url_for('admin_projects_edit', ['project_id' => $p['id']])) ?>" class="btn-edit">Edit</a>
+                                <form method="POST" action="<?= e(url_for('admin_projects_delete', ['project_id' => $p['id']])) ?>" data-confirm="Delete this project and its image? This cannot be undone.">
+                                    <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                                     <button type="submit" class="btn-danger">Delete</button>
                                 </form>
                             </div>
                         </td>
                     </tr>
-                    {% endfor %}
+                    <?php endforeach; ?>
                 </tbody>
             </table>
-            {% else %}
+            </div>
+            <?php else: ?>
             <p style="color: #6b7a8d;">No projects yet. Add one above.</p>
-            {% endif %}
+            <?php endif; ?>
         </div>
     </div>
 </body>

@@ -18,6 +18,9 @@
         .sidebar a.active { background: #e8f0fe; border-left-color: #2a7ae2; color: #2a7ae2; font-weight: 600; }
         .main { flex: 1; padding: 32px 40px; max-width: 800px; }
         .main h2 { font-size: 1.25rem; margin: 0 0 6px; }
+        .main { min-width: 0; }
+        .form-group { min-width: 0; }
+        .table-wrap { overflow-x: auto; }
         .page-hint { color: #6b7a8d; font-size: 0.88rem; margin-bottom: 28px; }
         .edit-form { background: #fff; border: 1px solid #d8dde4; border-radius: 8px; padding: 24px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; }
@@ -44,78 +47,86 @@
             .form-grid { grid-template-columns: 1fr; }
         }
     </style>
+    <script src="/static/admin.js" defer></script>
 </head>
 <body>
     <div class="admin-header">
         <h1>S3 Synergy — Admin</h1>
-        <form method="POST" action="{{ url_for('admin_logout') }}" style="display:inline;margin:0">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <form method="POST" action="/admin/logout" style="display:inline;margin:0">
+            <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
             <button type="submit" style="background:none;border:none;color:#8ab4d4;font-size:0.88rem;cursor:pointer;padding:0">Sign out</button>
         </form>
     </div>
     <div class="admin-body">
         <nav class="sidebar">
-            <a href="{{ url_for('admin_dashboard') }}">Content Pages</a>
-            <a href="{{ url_for('admin_projects') }}" class="active" style="margin-top: 12px; border-top: 1px solid #d8dde4; padding-top: 14px;">Manage Projects</a>
+            <a href="/admin">Content Pages</a>
+            <a href="/admin/projects" class="active" style="margin-top: 12px; border-top: 1px solid #d8dde4; padding-top: 14px;">Manage Projects</a>
+            <a href="/admin/images">Site Images</a>
         </nav>
         <div class="main">
             <h2>Edit Project</h2>
             <p class="page-hint">Update the project details below. Leave the image field empty to keep the current image.</p>
 
             <div class="edit-form">
-                <form method="POST" action="{{ url_for('admin_projects_edit', project_id=project.id) }}" enctype="multipart/form-data">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <form method="POST" action="<?= e(url_for('admin_projects_edit', ['project_id' => $project['id']])) ?>" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Tag (English)</label>
-                            <input type="text" name="tag_en" value="{{ project.tag_en }}">
+                            <input type="text" name="tag_en" value="<?= e($project['tag_en']) ?>">
                         </div>
                         <div class="form-group">
                             <label>Tag (Bulgarian)</label>
-                            <input type="text" name="tag_bg" value="{{ project.tag_bg }}">
+                            <input type="text" name="tag_bg" value="<?= e($project['tag_bg']) ?>">
                         </div>
                         <div class="form-group">
                             <label>Title (English)</label>
-                            <input type="text" name="title_en" value="{{ project.title_en }}">
+                            <input type="text" name="title_en" value="<?= e($project['title_en']) ?>">
                         </div>
                         <div class="form-group">
                             <label>Title (Bulgarian)</label>
-                            <input type="text" name="title_bg" value="{{ project.title_bg }}">
+                            <input type="text" name="title_bg" value="<?= e($project['title_bg']) ?>">
                         </div>
                         <div class="form-group">
                             <label>Date (English)</label>
-                            <input type="text" name="date_en" value="{{ project.date_en }}">
+                            <input type="text" name="date_en" value="<?= e($project['date_en']) ?>">
                         </div>
                         <div class="form-group">
                             <label>Date (Bulgarian)</label>
-                            <input type="text" name="date_bg" value="{{ project.date_bg }}">
+                            <input type="text" name="date_bg" value="<?= e($project['date_bg']) ?>">
                         </div>
                         <div class="form-group full">
                             <label>Description (English)</label>
-                            <textarea name="desc_en" rows="3">{{ project.desc_en }}</textarea>
+                            <textarea name="desc_en" rows="3"><?= e($project['desc_en']) ?></textarea>
                         </div>
                         <div class="form-group full">
                             <label>Description (Bulgarian)</label>
-                            <textarea name="desc_bg" rows="3">{{ project.desc_bg }}</textarea>
+                            <textarea name="desc_bg" rows="3"><?= e($project['desc_bg']) ?></textarea>
                         </div>
                         <div class="form-group">
                             <label>Sort Order</label>
-                            <input type="number" name="sort_order" value="{{ project.sort_order }}" min="0">
+                            <input type="number" name="sort_order" value="<?= e((string) $project['sort_order']) ?>" min="0">
                         </div>
                         <div class="form-group full">
                             <label>Replace Image</label>
-                            <input type="file" name="image" accept="image/*">
-                            {% if project.image_filename %}
+                            <input type="file" name="image" accept="image/jpeg,image/png,image/gif,image/webp" data-preview="current-preview">
                             <div class="current-img">
-                                <img src="{{ url_for('static', filename=project.image_filename) }}" alt="Current image">
-                                <span>Current image</span>
+                                <?php if ($project['image_filename']): ?>
+                                <img id="current-preview" src="<?= e('/static/' . $project['image_filename']) ?>" alt="Current image">
+                                <span>Current image. Choosing a new file replaces it.</span>
+                                <label style="font-size:0.85rem;margin-top:8px;display:flex;gap:6px;align-items:center;font-weight:400">
+                                    <input type="checkbox" name="remove_image" value="1" style="width:auto"> Remove image (show a blank placeholder)
+                                </label>
+                                <?php else: ?>
+                                <img id="current-preview" alt="New image preview" style="display:none">
+                                <span>No image yet.</span>
+                                <?php endif; ?>
                             </div>
-                            {% endif %}
                         </div>
                     </div>
                     <div class="form-actions">
                         <button type="submit" class="btn-primary">Save Changes</button>
-                        <a href="{{ url_for('admin_projects') }}" class="btn-secondary">Cancel</a>
+                        <a href="/admin/projects" class="btn-secondary">Cancel</a>
                     </div>
                 </form>
             </div>

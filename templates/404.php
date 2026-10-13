@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>413 — S3 Synergy Ltd</title>
+    <title>404 — S3 Synergy Ltd</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/style.css">
+    <?= site_css_vars() ?>
 </head>
 <body>
     <nav class="navbar">
         <div class="container nav-container">
-            <a href="{{ url_for('home') }}" class="logo-link" aria-label="Go to homepage">
-                <img src="{{ url_for('static', filename='images/logo_S3.png') }}" alt="S3 Synergy Ltd Logo" class="logo-img">
+            <a href="/" class="logo-link" aria-label="Go to homepage">
+                <img src="<?= e(site_img('logo')) ?>" alt="S3 Synergy Ltd Logo" class="logo-img">
                 <div class="logo-text">
                     <div class="company-name">S3 Synergy</div>
                 </div>
@@ -19,10 +20,10 @@
     </nav>
     <section class="about-section" style="text-align:center; padding: 80px 20px;">
         <div class="container">
-            <h1 style="font-size:4rem; color:#1e2d3a; margin-bottom:8px;">413</h1>
-            <h2 style="margin-bottom:16px;">File Too Large</h2>
-            <p style="color:#6b7a8d; margin-bottom:32px;">The uploaded file exceeds the 8 MB limit. Please use a smaller image.</p>
-            <a href="javascript:history.back()" class="hero-btn">Go Back</a>
+            <h1 style="font-size:4rem; color:#1e2d3a; margin-bottom:8px;">404</h1>
+            <h2 style="margin-bottom:16px;">Page Not Found</h2>
+            <p style="color:#6b7a8d; margin-bottom:32px;">The page you are looking for does not exist.</p>
+            <a href="/" class="hero-btn">Back to Home</a>
         </div>
     </section>
     <footer>

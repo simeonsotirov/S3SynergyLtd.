@@ -1,14 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Language switch logic
     const langBtn = document.getElementById("lang-switch");
-    const languages = ["en", "bg"]; // Removed "de" from the languages array
-    let currentLangIdx = 0;
+    const languages = ["en", "bg"];
+    const LANG_KEY = "siteLang";
+    let memoryLang = "en";
+
+    function readLang() {
+        try {
+            const stored = localStorage.getItem(LANG_KEY);
+            if (languages.includes(stored)) {
+                return stored;
+            }
+        } catch (err) {
+            return memoryLang;
+        }
+        return memoryLang;
+    }
+
+    function saveLang(lang) {
+        memoryLang = lang;
+        try {
+            localStorage.setItem(LANG_KEY, lang);
+        } catch (err) {
+            return;
+        }
+    }
+
+    let currentLangIdx = languages.indexOf(readLang());
+
+    function updateLangButton() {
+        if (langBtn) {
+            langBtn.textContent = languages[(currentLangIdx + 1) % languages.length].toUpperCase();
+        }
+    }
 
     function updateLangTexts() {
+        const lang = languages[currentLangIdx];
+        document.documentElement.setAttribute("lang", lang);
         document.querySelectorAll("[data-en]").forEach(el => {
-            el.textContent = el.getAttribute(`data-${languages[currentLangIdx]}`);
+            const value = el.getAttribute(`data-${lang}`);
+            if (value !== null) {
+                el.textContent = value;
+            }
         });
+        updateLangButton();
     }
+
+    window.addEventListener("storage", (event) => {
+        if (event.key === LANG_KEY && languages.includes(event.newValue)) {
+            currentLangIdx = languages.indexOf(event.newValue);
+            updateLangTexts();
+        }
+    });
 
     function showToast(msg) {
         let toast = document.createElement("div");
@@ -26,11 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (langBtn) {
         langBtn.addEventListener("click", () => {
             currentLangIdx = (currentLangIdx + 1) % languages.length;
-            langBtn.textContent = languages[(currentLangIdx + 1) % languages.length].toUpperCase();
+            saveLang(languages[currentLangIdx]);
             updateLangTexts();
             showToast(`Language switched to ${languages[currentLangIdx].toUpperCase()}`);
         });
-        langBtn.textContent = languages[1].toUpperCase();
     }
 
     updateLangTexts();
@@ -81,13 +123,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const consentPopup = document.getElementById("cookie-consent");
     const acceptButton = document.getElementById("cookie-accept");
-    if (!localStorage.getItem("cookieConsent")) {
-         consentPopup.style.display = "block";
+    let consentGiven = false;
+    try {
+        consentGiven = Boolean(localStorage.getItem("cookieConsent"));
+    } catch (err) {
+        consentGiven = false;
     }
-    acceptButton && acceptButton.addEventListener("click", () => {
-         localStorage.setItem("cookieConsent", "true");
-         consentPopup.style.display = "none";
-    });
+    if (consentPopup && !consentGiven) {
+        consentPopup.style.display = "block";
+    }
+    if (acceptButton) {
+        acceptButton.addEventListener("click", () => {
+            try {
+                localStorage.setItem("cookieConsent", "true");
+            } catch (err) {
+                consentGiven = true;
+            }
+            if (consentPopup) {
+                consentPopup.style.display = "none";
+            }
+        });
+    }
 
     const hamburger = document.getElementById("hamburger");
     const navRight = document.querySelector(".nav-right");

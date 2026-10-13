@@ -38,49 +38,51 @@
             .lang-row { grid-template-columns: 1fr; }
         }
     </style>
+    <script src="/static/admin.js" defer></script>
 </head>
 <body>
     <div class="admin-header">
         <h1>S3 Synergy — Admin</h1>
-        <form method="POST" action="{{ url_for('admin_logout') }}" style="display:inline;margin:0">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <form method="POST" action="/admin/logout" style="display:inline;margin:0">
+            <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
             <button type="submit" style="background:none;border:none;color:#8ab4d4;font-size:0.88rem;cursor:pointer;padding:0">Sign out</button>
         </form>
     </div>
     <div class="admin-body">
         <nav class="sidebar">
-            {% for p in pages %}
-            <a href="{{ url_for('admin_dashboard') }}?page={{ p }}" class="{{ 'active' if active_page == p else '' }}">{{ p|title }}</a>
-            {% endfor %}
-            <a href="{{ url_for('admin_projects') }}" style="margin-top: 12px; border-top: 1px solid #d8dde4; padding-top: 14px;">Manage Projects</a>
+            <?php foreach ($pages as $p): ?>
+            <a href="/admin?page=<?= e(rawurlencode($p)) ?>" class="<?= $active_page === $p ? 'active' : '' ?>"><?= e(ucfirst($p)) ?></a>
+            <?php endforeach; ?>
+            <a href="/admin/projects" style="margin-top: 12px; border-top: 1px solid #d8dde4; padding-top: 14px;">Manage Projects</a>
+            <a href="/admin/images">Site Images</a>
         </nav>
         <div class="main">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for msg in messages %}
-                        <div class="flash-ok">{{ msg }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            <h2>{{ active_page|title }}</h2>
-            <p class="page-hint">Edit English and Bulgarian content for the <strong>{{ active_page }}</strong> page. Click Save to apply.</p>
-            <form method="POST" action="{{ url_for('admin_save', page=active_page) }}">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                {% for key, vals in defaults[active_page].items() %}
+            <?php foreach (get_flashed_messages() as $msg): ?>
+                <div class="flash-ok"><?= e($msg) ?></div>
+            <?php endforeach; ?>
+            <h2><?= e(ucfirst($active_page)) ?></h2>
+            <p class="page-hint">Edit English and Bulgarian content for the <strong><?= e($active_page) ?></strong> page. Click Save to apply.</p>
+            <form method="POST" action="<?= e(url_for('admin_save', ['page' => $active_page])) ?>">
+                <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
+                <?php foreach ($defaults[$active_page] as $key => $vals): ?>
+                <?php
+                    $valueEn = $content[$active_page][$key]['en'] ?? ($vals['en'] ?? '');
+                    $valueBg = $content[$active_page][$key]['bg'] ?? ($vals['bg'] ?? '');
+                ?>
                 <div class="field-block">
-                    <div class="field-key">{{ key }}</div>
+                    <div class="field-key"><?= e($key) ?></div>
                     <div class="lang-row">
                         <div class="lang-col">
                             <label>English</label>
-                            <textarea name="{{ key }}__en" rows="{{ [((content.get(active_page, {}).get(key, {}).get('en', vals.get('en', ''))|length) // 60 + 1), 2]|max }}">{{ content.get(active_page, {}).get(key, {}).get('en', vals.get('en', '')) }}</textarea>
+                            <textarea name="<?= e($key) ?>__en" rows="<?= max(intdiv(char_len($valueEn), 60) + 1, 2) ?>"><?= e($valueEn) ?></textarea>
                         </div>
                         <div class="lang-col">
                             <label>Bulgarian</label>
-                            <textarea name="{{ key }}__bg" rows="{{ [((content.get(active_page, {}).get(key, {}).get('bg', vals.get('bg', ''))|length) // 60 + 1), 2]|max }}">{{ content.get(active_page, {}).get(key, {}).get('bg', vals.get('bg', '')) }}</textarea>
+                            <textarea name="<?= e($key) ?>__bg" rows="<?= max(intdiv(char_len($valueBg), 60) + 1, 2) ?>"><?= e($valueBg) ?></textarea>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+                <?php endforeach; ?>
                 <div class="save-bar">
                     <button type="submit" class="save-btn">Save changes</button>
                 </div>

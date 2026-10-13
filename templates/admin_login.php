@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <title>Admin Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/style.css">
     <style>
         body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #1e2d3a; }
-        .login-card { background: #fff; border-radius: 10px; padding: 48px 40px; width: 100%; max-width: 380px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); }
+        .login-card { box-sizing: border-box; background: #fff; border-radius: 10px; padding: 48px 40px; width: 100%; max-width: 380px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); }
         .login-card h1 { font-size: 1.5rem; margin-bottom: 8px; color: #1e2d3a; }
         .login-card p { color: #6b7a8d; margin-bottom: 28px; font-size: 0.95rem; }
         .login-card label { display: block; font-size: 0.88rem; font-weight: 600; color: #1e2d3a; margin-bottom: 6px; }
@@ -22,15 +22,11 @@
     <div class="login-card">
         <h1>Admin Login</h1>
         <p>S3 Synergy Ltd — Content Management</p>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for msg in messages %}
-                    <div class="flash-error">{{ msg }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+        <?php foreach (get_flashed_messages() as $msg): ?>
+            <div class="flash-error"><?= e($msg) ?></div>
+        <?php endforeach; ?>
         <form method="POST">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" autofocus required autocomplete="username">
             <label for="password">Password</label>
